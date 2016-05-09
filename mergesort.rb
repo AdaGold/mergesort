@@ -1,29 +1,24 @@
-def mergesort(a)
-    # if the array size is 0|1 then the list is considered sorted, return sorted array
-    # split the list into two halves
-    # merge sort each half
-    # combine the sorted halves
+def mergesort(unordered)
+
+  return unordered if unordered.length <= 1
+  left,right = unordered.each_slice( (unordered.size/2.0).round ).to_a
+  return merge(mergesort(left), mergesort(right))
+
 end
 
-def split_array(a)
-    # find the middle index
-    # split the array in half - take a look at take and drop in the ruby docs, or use ranges
-    # return left and right halves of array as separate arrays - did you know a method can return multiple arrays? look it up
-end
 
-# precondition: a and b are sorted
-def combine(a, b)
-    # create a results array
-    # counters pointing to the index of the smallest elements in each array
-    # check that we have elements to compare
-        # push the smaller element onto the result array
-    # if there are elements left over in a, move them to result
-    # if there are elements left over in b, move them to result
+def merge(as, bs)
+  results = []
+  while as.length > 0 && bs.length > 0 do
+    if as[0] < bs[0]
+      a = as.slice!(0)
+      results << a
+      results += bs if as.empty?
+    else
+      b = bs.slice!(0)
+      results << b
+      results += as if bs.empty?
+    end
+  end
+  results
 end
-
-# TEST IT
-a = [6,23,53,1,2,5,62,61,33,21,14,6,23]
-a = a.shuffle
-puts "ORIGINAL \n" + a.to_s
-a = mergesort(a)
-puts "AFTER MERGESORT \n" + a.to_s
