@@ -1,8 +1,6 @@
 def mergesort(a)
     # if the array size is 0|1 then the list is considered sorted, return sorted array
-    if a.length == 0 || a.length == 1
-      return a
-    end
+    return a if a.size <= 1
     # split the list into two halves
     left, right = split_array(a)
     # merge sort each half
@@ -14,7 +12,7 @@ end
 
 def split_array(a)
     midway = a.length/2
-    return a[0...midway], a[midway..-1]
+    a[0...midway], a[midway..-1]
 end
 
 # precondition: a and b are sorted
